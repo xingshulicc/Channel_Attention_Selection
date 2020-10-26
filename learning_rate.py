@@ -12,8 +12,8 @@ from keras.callbacks import LearningRateScheduler
 from keras.callbacks import ReduceLROnPlateau
 
 
-lr_base = 0.0001
-epochs = 200
+lr_base = 0.001
+epochs = 500
 
 def lr_scheduler(epoch, mode = 'step_decay'):
     if mode is 'progressive':
@@ -38,8 +38,8 @@ def lr_scheduler(epoch, mode = 'step_decay'):
     
 def choose(lr_monitorable = True):
     if lr_monitorable:
-        lr_reduce = ReduceLROnPlateau(monitor = 'val_loss', factor = 0.8, patience = 5, 
-                                  mode = 'auto', min_lr = lr_base * 1e-4)
+        lr_reduce = ReduceLROnPlateau(monitor = 'val_acc', factor = 0.8, patience = 6, 
+                                  mode = 'auto', min_lr = lr_base * 1e-8)
     else:
         lr_reduce = LearningRateScheduler(lr_scheduler)
         
