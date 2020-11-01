@@ -167,13 +167,13 @@ def Weakly_DenseNet(input_shape, classes):
 #    The shape of pool_3: 14 x 14 x 256
     x_7 = Concatenate(axis = bn_axis)([pool_2, x_6])
 #    The shape of x_7: 28 x 28 x 384
-    x_8 = _grouped_conv_block(x_7, 2, 512, 3, 4)
+    x_8 = _select_kernel(x_7, [3, 5], 512, 2, 4)
 #    The shape of x_8: 28 x 28 x 512
     pool_4 = MaxPooling2D(pool_size = (2, 2), strides = (2, 2), padding = 'same')(x_8)
 #    The shape of pool_4: 14 x 14 x 512
     x_9 = Concatenate(axis = bn_axis)([pool_3, pool_4])
 #    The shape of x_9: 14 x 14 x 768
-    x_10 = _grouped_conv_block(x_9, 2, 512, 3, 5)
+    x_10 = _select_kernel(x_9, [3, 5], 512, 2, 5)
 #    The shape of x_10: 14 x 14 x 512
     pool_5 = MaxPooling2D(pool_size = (2, 2), strides = (2, 2), padding = 'same')(x_10)
 #    The shape of pool_5: 7 x 7 x 512
